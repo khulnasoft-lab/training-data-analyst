@@ -27,7 +27,7 @@ class MyCLI:
 
         logging.info("Compiling '%s'...", path)
         compiled_path = f"{path}.tar.gz"
-        result = os.system(f"dsl-compile --py {path} --output {compiled_path}")
+        result = subprocess.run(f"dsl-compile --py {path} --output {compiled_path}", shell=False, check=True, text=True)
         if result != 0:
             logging.error("Failed to compile '%s' with error code %i.", path, result)
             sys.exit(result)
