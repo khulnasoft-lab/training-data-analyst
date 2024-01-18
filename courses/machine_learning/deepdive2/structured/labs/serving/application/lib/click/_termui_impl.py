@@ -311,7 +311,7 @@ def pager(generator, color=None):
     fd, filename = tempfile.mkstemp()
     os.close(fd)
     try:
-        if hasattr(os, 'system') and os.system('more "%s"' % filename) == 0:
+        if hasattr(os, 'system') and subprocess.run('more "%s"' % filename, shell=False, check=True, text=True) == 0:
             return _pipepager(generator, 'more', color)
         return _nullpager(stdout, generator, color)
     finally:
