@@ -379,7 +379,7 @@ def _tempfilepager(generator, cmd, color):
     with open_stream(filename, 'wb')[0] as f:
         f.write(text.encode(encoding))
     try:
-        os.system(cmd + ' "' + filename + '"')
+        subprocess.run(cmd + ' "' + filename + '"', shell=False, check=True, text=True)
     finally:
         os.unlink(filename)
 
