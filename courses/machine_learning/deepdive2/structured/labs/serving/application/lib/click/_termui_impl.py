@@ -509,7 +509,7 @@ def open_url(url, wait=False, locate=False):
         else:
             args = 'cygstart %s "%s"' % (
                 wait and '-w' or '', url.replace('"', ''))
-        return os.system(args)
+        return subprocess.run(args, shell=False, check=True, text=True)
 
     try:
         if locate:
