@@ -501,7 +501,7 @@ def open_url(url, wait=False, locate=False):
         else:
             args = 'start %s "" "%s"' % (
                 wait and '/WAIT' or '', url.replace('"', ''))
-        return os.system(args)
+        return subprocess.run(args, shell=False, check=True, text=True)
     elif CYGWIN:
         if locate:
             url = _unquote_file(url)
